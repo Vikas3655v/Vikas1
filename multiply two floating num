@@ -1,0 +1,12 @@
+#include<stdio.h>
+#include<conio.h>
+
+int main ()
+{
+float a, b, Mul;
+printf(“Enter a float number:”);
+scanf(“%f %f”, &a, &b);
+Mul=a*b;
+printf(“ The Multiplication of floating numbers =%f ”, Mul);
+return 0;
+}
