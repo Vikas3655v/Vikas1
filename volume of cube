@@ -1,0 +1,12 @@
+#include<stdio.h>
+#include<conio.h>
+
+int main() 
+{  
+    int a, cube;
+	printf(“Enter the number:”)
+scanf(“%d”, &a);
+cube=a*a*a;
+	printf("Volume of the cube=%d", cube);
+	return 0;
+   }	
