@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include<math.h>
+int main(){
+    int n,c=0 ;
+    scanf("%d",&n);int tep=n;
+    int sq=n*n;
+    while(n!=0)//297
+    {
+        int m=n%10;//2
+        c++;
+        n/=10;//0
+    }
+    int po=pow(10,c);
+    int rem=sq%po;
+    int qo=sq/po;
+    int a=rem+qo;
+    printf("%d",a);
+    if (a==tep)
+    {
+        printf("it is a capricorn");
+    }
+    else
+    {
+        printf("it is a not capricorn");
+    }
+  
+    return 0;
+}
