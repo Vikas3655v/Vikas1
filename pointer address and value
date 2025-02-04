@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main(void)
+{
+	int a=10;
+	float b;
+	char c;
+	int *ptr_a = &a;
+	float *ptr_b = &b;
+	char *ptr_c = &c;
+	printf("Address of a: %p\n", ptr_a);
+	printf("Value of a: %d\n", *ptr_a);
+	printf("Address of b: %p\n", ptr_b);
+	printf("Value of b: %d\n", *ptr_b);
+	printf("Next Address of b: %p\n", ptr_b+1);
+	printf("Address of c: %p\n", ptr_c);
+	printf("Value of c: %d\n", *ptr_c);
+	return 0;
+}
+
