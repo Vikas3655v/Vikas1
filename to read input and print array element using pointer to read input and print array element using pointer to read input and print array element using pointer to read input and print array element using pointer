@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main()
+{
+	int arr[5] = {10, 20, 30, 40, 50};
+    int sum=0;
+	int *parr = arr;
+    int i;
+	for(i = 0; i < 5; i++)
+	{
+		printf("%d  ", *(parr + i));
+		sum+=*(parr+i);
+	}
+	printf("\n%d",sum);
+	return 0;
+}
