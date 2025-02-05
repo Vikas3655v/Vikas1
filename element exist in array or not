@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    int n, k;
+    
+    // Input array size
+    scanf("%d", &n);
+    int a[n];
+
+    // Input array elements
+    for(int i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    // Input the search element
+    scanf("%d", &k);
+
+    // Search for k in the array
+    int flag = 0;
+    for(int i = 0; i < n; i++) {
+        if(a[i] == k) {
+            flag = 1;
+            break;  // No need to check further
+        }
+    }
+
+    // Print result
+    if(flag == 1)
+        printf("No\n");  // k is present
+    else
+        printf("Yes\n"); // k is not present
+
+    return 0;
+}
