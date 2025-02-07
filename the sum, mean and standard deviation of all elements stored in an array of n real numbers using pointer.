@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<math.h>
+
+void main()
+{
+int arr[10],n,i,sum=0;
+int *ptr=arr;
+float sd1=0,std,mean;
+printf("Enter the Size of array:");
+scanf("%d",&n);
+printf("Enter %d Elements:",n);
+for (i=0;i<n;i++)
+scanf("%d",&arr[i]);
+for (i=0;i<n;i++)
+{
+sum+=*ptr;
+*ptr++;
+}
+mean=sum/n;
+for (i = 0; i < n; i++) 
+{  
+sd1 += pow((arr[i] - mean), 2);
+ }
+std=sqrt((sd1)/n);
+printf("\nSum = %d\nmean = %f \nSD=%f",sum,mean,std);
+}
