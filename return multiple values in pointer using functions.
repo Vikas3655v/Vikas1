@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int* getNEvenNumbers(int n, int *array)
+ {
+    int i;
+     for(i = 0; i < n; i++)
+     {
+        array[i] = 2*(i+1);
+     }
+    return array;
+}
+int main()
+{
+    int i, n, array[100];
+    printf("Enter one integer.\n");
+    scanf("%d", &n);
+    getNEvenNumbers(n, array);
+    for(i = 0; i < n; i++)
+        printf("%d ", array[i]);
+    return 0;
+}
