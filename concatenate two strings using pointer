@@ -1,0 +1,22 @@
+#include<stdio.h>
+int main()
+{
+char aa[100], bb[100];
+char *a = aa;
+   char *b = bb;
+    scanf("%s",aa);  
+    scanf("%s",bb); 
+    while(*a)   
+      {     
+        a++;    
+      }
+     while(*b)  
+     {
+        *a = *b;
+         b++;
+         a++;
+      }
+    *a = '\0';  
+    printf("\nAfter concatenation is: %s ", aa);
+    return 0;
+}
