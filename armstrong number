@@ -1,21 +1,27 @@
-import java.util.scanner
+import java.util.Scanner;
+
 public class ArmstrongNumber {
-public static void main(string[] args){
-int arm=0,a,b,c,d,no;
-scanner scanner = new scanner(system.in)
-system.out.print("enter any number:");
-no = scanner.nextint();
-d = no;
-while(no>0)
-{
-	a = no%10;
-	no = no/10;
-	arm = arm+a*a*a;
+    public static void main(String[] args) {
+        int arm = 0, a, d, no;
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter any number: ");
+        no = scanner.nextInt();
+        d = no;
+        
+        while (no > 0) {
+            a = no % 10;
+            no = no / 10;
+            arm = arm + (a * a * a);  // Works for 3-digit numbers
+        }
+        
+        if (arm == d) {
+            System.out.println("Armstrong number");
+        } else {
+            System.out.println("Not an Armstrong number");
+        }
+        
+        scanner.close();
+    }
 }
-if(arm==d){
-system.out.println("Armstrong number");
-}
-else {
-system.out.println("Not Armstrong number");
-}
-}
+
