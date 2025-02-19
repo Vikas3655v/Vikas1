@@ -1,12 +1,20 @@
-#include<stdio.h>
-#include<conio.h>
+import java.util.Scanner;
 
-int main()
-{
-	int a,b, sum;
-	printf(“Enter a and b value:”);
-	scanf(“%d %d”, &a, &b);
-	sum=a+b;
-	printf(“The sum is: %d”, sum);
-	return 0;
+public class SumCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int a, b, sum;
+        
+        System.out.print("Enter a and b value: ");
+        a = scanner.nextInt();
+        b = scanner.nextInt();
+        
+        sum = a + b;
+        
+        System.out.println("The sum is: " + sum);
+        
+        scanner.close();
+    }
 }
+
