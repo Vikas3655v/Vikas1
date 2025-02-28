@@ -1,16 +1,32 @@
-#include <stdio.h>
+import java.util.Scanner;
 
-int main()
-{
-	int arr[5] = {10, 20, 30, 40, 50};
-    int sum=0;
-	int *parr = arr;
-    int i;
-	for(i = 0; i < 5; i++)
-	{
-		printf("%d  ", *(parr + i));
-		sum+=*(parr+i);
-	}
-	printf("\n%d",sum);
-	return 0;
+public class ArrayPointerSimulation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read size of array
+        System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+
+        int[] array = new int[size]; // array acts like a pointer to the first element
+
+        // Read array elements
+        System.out.println("Enter " + size + " elements:");
+        for (int i = 0; i < size; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        // Print array elements using reference (simulating pointer traversal)
+        System.out.println("Array elements are:");
+        for (int i = 0; i < size; i++) {
+            System.out.println("Element at index " + i + ": " + *(array, i));
+        }
+
+        scanner.close();
+    }
+
+    // Simulated pointer access function (like dereferencing in C/C++)
+    public static int *(int[] arr, int index) {
+        return arr[index];  // accessing array element directly
+    }
 }
