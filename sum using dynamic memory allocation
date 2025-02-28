@@ -1,28 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
+import java.util.Scanner;
 
-int main() 
-{
-  int n, i, *ptr, sum = 0;
-  printf("Enter number of elements: ");
-  scanf("%d", &n);
-  ptr = (int*) malloc(n * sizeof(int));
-//ptr = (int*) calloc(n, sizeof(int));
-//ptr = realloc(ptr, n2 * sizeof(int));
- if(ptr == NULL) 
- {
-    printf("Error! memory not allocated.");
-    exit(0);
- }
-  printf("Enter elements: ");
+public class DynamicArraySum {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
+        // Dynamically allocate array by asking user for size
+        System.out.print("Enter the number of elements: ");
+        int n = scanner.nextInt();
 
-  for(i = 0; i < n; ++i) 
-  {
-    scanf("%d", ptr + i);
-    sum += *(ptr + i);
-  }
-  printf("Sum = %d", sum);
-  free(ptr);
-  return 0;
-  }
+        int[] numbers = new int[n]; // This is dynamic memory allocation in Java
+
+        // Input elements
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+
+        // Calculate sum
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += numbers[i];
+        }
+
+        // Print result
+        System.out.println("Sum of array elements: " + sum);
+
+        scanner.close();
+    }
+}
