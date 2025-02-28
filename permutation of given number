@@ -1,21 +1,32 @@
-#include<stdio.h>
-  
-void main ()  
-{  
-    int n, r, per, fact1, fact2,num,i;  
-    printf("nPr calculation");
-    scanf("%d%d",&n,&r);  
-    fact1 = n;  
-    for (int i = n - 1; i >= 1; i--)  
-    {  
-        fact1 = fact1 * i;  
-    }  
-    num = n - r;  
-    fact2 = num;  
-    for (i = num - 1; i >= 1; i--)  
-    {  
-        fact2 = fact2 * i;  
-    }  
-    per = fact1 / fact2;  
-    printf("nPr = %d",per);  
-      }  
+import java.util.*;
+
+public class NumberPermutations {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        String number = scanner.next(); // Read number as string to handle digits easily
+        
+        System.out.println("Permutations of " + number + " are:");
+        generatePermutations(number, "");
+        
+        scanner.close();
+    }
+
+    public static void generatePermutations(String remaining, String currentPermutation) {
+        if (remaining.isEmpty()) {
+            System.out.println(currentPermutation);
+            return;
+        }
+        
+        for (int i = 0; i < remaining.length(); i++) {
+            char ch = remaining.charAt(i);
+            String leftPart = remaining.substring(0, i);
+            String rightPart = remaining.substring(i + 1);
+            String rest = leftPart + rightPart;
+
+            generatePermutations(rest, currentPermutation + ch);
+        }
+    }
+}
+
