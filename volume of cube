@@ -1,12 +1,20 @@
-#include<stdio.h>
-#include<conio.h>
+import java.util.Scanner;
 
-int main() 
-{  
-    int a, cube;
-	printf(“Enter the number:”)
-scanf(“%d”, &a);
-cube=a*a*a;
-	printf("Volume of the cube=%d", cube);
-	return 0;
-   }	
+public class CubeVolumeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the side length of the cube: ");
+        double side = scanner.nextDouble();
+        
+        double volume = calculateCubeVolume(side);
+        
+        System.out.printf("The volume of the cube is: %.2f cubic units\n", volume);
+        
+        scanner.close();
+    }
+    
+    public static double calculateCubeVolume(double side) {
+        return Math.pow(side, 3);  // side³
+    }
+}
