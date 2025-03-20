@@ -1,0 +1,179 @@
+It looks like your project requires a Redux setup for managing the shopping cart. Here’s a structured approach with exact answers:
+
+1. Install Redux and React-Redux
+Run this command in your project directory:
+
+sh
+Copy
+Edit
+npm install @reduxjs/toolkit react-redux
+2. Set Up Redux Store
+Create a new file store.js in a redux folder and add:
+
+javascript
+Copy
+Edit
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./cartSlice";
+
+const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+  },
+});
+
+export default store;
+3. Create the Cart Slice
+Inside redux, create a file called cartSlice.js and add:
+
+javascript
+Copy
+Edit
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  cartItems: [],
+  totalQuantity: 0,
+  totalPrice: 0,
+};
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (state, action) => {
+      const existingItem = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.cartItems.push({ ...action.payload, quantity: 1 });
+      }
+
+      state.totalQuantity += 1;
+      state.totalPrice += action.payload.price;
+    },
+    removeFromCart: (state, action) => {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (itemIndex >= 0) {
+        state.totalQuantity -= state.cartItems[itemIndex].quantity;
+        state.totalPrice -=
+          state.cartItems[itemIndex].price * state.cartItems[itemIndex].quantity;
+        state.cartItems.splice(itemIndex, 1);
+      }
+    },
+    increaseQuantity: (state, action) => {
+      const item = state.cartItems.find((item) => item.id === action.payload.id);
+      if (item) {
+        item.quantity += 1;
+        state.totalQuantity += 1;
+        state.totalPrice += item.price;
+      }
+    },
+    decreaseQuantity: (state, action) => {
+      const item = state.cartItems.find((item) => item.id === action.payload.id);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+        state.totalQuantity -= 1;
+        state.totalPrice -= item.price;
+      } else if (item) {
+        state.cartItems = state.cartItems.filter((i) => i.id !== action.payload.id);
+        state.totalQuantity -= 1;
+        state.totalPrice -= item.price;
+      }
+    },
+  },
+});
+
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } =
+  cartSlice.actions;
+export default cartSlice.reducer;
+4. Provide Redux Store to React
+Wrap your App.js with Provider from react-redux:
+
+javascript
+Copy
+Edit
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import HomePage from "./pages/HomePage";
+
+function App() {
+  return (
+    <Provider store={store}>
+      <HomePage />
+    </Provider>
+  );
+}
+
+export default App;
+5. Connect Redux to Components
+Product Listing Page (ProductCard.js)
+javascript
+Copy
+Edit
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+
+const ProductCard = ({ plant }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <img src={plant.image} alt={plant.name} />
+      <h3>{plant.name}</h3>
+      <p>${plant.price}</p>
+      <button onClick={() => dispatch(addToCart(plant))}>Add to Cart</button>
+    </div>
+  );
+};
+
+export default ProductCard;
+Shopping Cart Page (Cart.js)
+javascript
+Copy
+Edit
+import { useSelector, useDispatch } from "react-redux";
+import { increaseQuantity, decreaseQuantity, removeFromCart } from "../redux/cartSlice";
+
+const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <h2>Shopping Cart</h2>
+      <p>Total Items: {cart.totalQuantity}</p>
+      <p>Total Price: ${cart.totalPrice}</p>
+      {cart.cartItems.map((item) => (
+        <div key={item.id}>
+          <img src={item.image} alt={item.name} />
+          <h3>{item.name}</h3>
+          <p>${item.price} x {item.quantity}</p>
+          <button onClick={() => dispatch(increaseQuantity(item))}>+</button>
+          <button onClick={() => dispatch(decreaseQuantity(item))}>-</button>
+          <button onClick={() => dispatch(removeFromCart(item))}>Remove</button>
+        </div>
+      ))}
+      <button onClick={() => alert("Coming Soon!")}>Checkout</button>
+      <button onClick={() => window.location.href = "/"}>Continue Shopping</button>
+    </div>
+  );
+};
+
+export default Cart;
+What This Covers
+✅ GitHub Submission: Create a public repo with Redux files
+✅ Landing Page: Company details, background image, and navigation
+✅ Product Listing Page: Six plants, categories, and "Add to Cart" button behavior
+✅ Shopping Cart Page: Displays cart items, updates quantity, removes items, and calculates total
+
+Final Steps
+Push everything to GitHub (make the repo public).
+Deploy your site (Netlify, Vercel, or GitHub Pages).
+Submit the GitHub link and website link for grading.
